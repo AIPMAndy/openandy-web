@@ -87,6 +87,27 @@ export default function DiscoverPage() {
           )}
         </div>
 
+        {/* CTA Section - 企业微信引导 */}
+        <div className="mt-12 bg-white border border-border rounded-lg p-8 text-center">
+          <h2 className="text-2xl font-light text-text-primary mb-3">
+            💬 想要更深入的交流？
+          </h2>
+          <p className="text-text-muted mb-6">
+            添加 Andy 的企业微信，获取 AI 产品咨询、技术指导和项目合作机会
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="weixin://dl/business/?t=YOUR_ENTERPRISE_WECHAT_CODE"
+              className="px-6 py-3 bg-text-primary text-white rounded-lg text-sm hover:bg-text-secondary transition-colors"
+            >
+              添加企业微信
+            </a>
+            <span className="text-sm text-text-muted">
+              或搜索企业微信：<strong>AI PMAndy</strong>
+            </span>
+          </div>
+        </div>
+
         {/* Footer */}
         <div className="mt-12 pt-8 border-t border-border text-center">
           <p className="text-sm text-text-muted">

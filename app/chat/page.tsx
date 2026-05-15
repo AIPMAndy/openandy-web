@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChatMessage as ChatMessageType, sendMessageToDify } from "@/lib/dify";
+import { ChatMessage as ChatMessageType, sendMessageToDifyStream } from "@/lib/dify";
 import ChatMessage from "@/components/ChatMessage";
 
 const WELCOME_MESSAGE: ChatMessageType = {
@@ -48,18 +48,37 @@ function ChatContent() {
     setInput("");
     setIsLoading(true);
 
+    // 创建一个临时的 assistant 消息用于流式更新
+    const assistantMessageId = (Date.now() + 1).toString();
+    const assistantMessage: ChatMessageType = {
+      id: assistantMessageId,
+      role: "assistant",
+      content: "",
+      timestamp: Date.now(),
+    };
+
+    setMessages((prev) => [...prev, assistantMessage]);
+
     try {
-      const response = await sendMessageToDify(input.trim());
-      const assistantMessage: ChatMessageType = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: response,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
+      await sendMessageToDifyStream(
+        input.trim(),
+        (chunk) => {
+          // 流式更新消息内容
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === assistantMessageId
+                ? { ...msg, content: chunk }
+                : msg
+            )
+          );
+        },
+        () => {
+          // 完成
+          setIsLoading(false);
+        }
+      );
     } catch (error) {
       console.error("Chat error:", error);
-    } finally {
       setIsLoading(false);
     }
   };

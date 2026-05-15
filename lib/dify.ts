@@ -8,6 +8,74 @@ export interface ChatMessage {
 const DIFY_API_URL = "https://api.dify.ai/v1/chat-messages";
 const DIFY_API_KEY = "app-9ZpnryN8L6cjuDOvGvEtwV37";
 
+// 流式输出回调
+export async function sendMessageToDifyStream(
+  message: string,
+  onChunk: (chunk: string) => void,
+  onComplete: () => void
+): Promise<void> {
+  try {
+    const response = await fetch(DIFY_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${DIFY_API_KEY}`,
+      },
+      body: JSON.stringify({
+        inputs: {},
+        query: message,
+        response_mode: "streaming",
+        user: "web-user",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
+
+    if (!reader) {
+      throw new Error("No response body");
+    }
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      const lines = chunk.split("\n").filter((line) => line.trim());
+
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          try {
+            const data = JSON.parse(line.slice(6));
+            if (data.answer) {
+              onChunk(data.answer);
+            }
+          } catch (e) {
+            console.error("Parse error:", e);
+          }
+        }
+      }
+    }
+
+    onComplete();
+  } catch (error) {
+    console.error("Dify API error:", error);
+    // 降级到 mock 响应
+    const mockResponse = getMockResponse(message);
+    // 模拟流式输出
+    for (let i = 0; i < mockResponse.length; i += 10) {
+      onChunk(mockResponse.slice(0, i + 10));
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+    onComplete();
+  }
+}
+
+// 保留原有的阻塞式 API（兼容性）
 export async function sendMessageToDify(message: string): Promise<string> {
   try {
     const response = await fetch(DIFY_API_URL, {

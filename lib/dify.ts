@@ -40,6 +40,8 @@ export async function sendMessageToDifyStream(
       throw new Error("No response body");
     }
 
+    let accumulatedAnswer = "";
+
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -51,8 +53,9 @@ export async function sendMessageToDifyStream(
         if (line.startsWith("data: ")) {
           try {
             const data = JSON.parse(line.slice(6));
-            if (data.answer) {
-              onChunk(data.answer);
+            if (data.event === "message" && data.answer) {
+              accumulatedAnswer += data.answer;
+              onChunk(accumulatedAnswer);
             }
           } catch (e) {
             console.error("Parse error:", e);

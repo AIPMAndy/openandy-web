@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function FortunePage() {
   const [formData, setFormData] = useState({
@@ -257,9 +259,48 @@ export default function FortunePage() {
           /* Result */
           <div className="bg-white rounded-lg border border-border p-8">
             <div className="prose prose-sm max-w-none">
-              <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  p: ({ children }) => <p className="mb-3 text-gray-700 leading-relaxed">{children}</p>,
+                  strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
+                  ul: ({ children }) => <ul className="list-disc list-inside mb-3 space-y-1.5">{children}</ul>,
+                  ol: ({ children }) => <ol className="list-decimal list-inside mb-3 space-y-1.5">{children}</ol>,
+                  li: ({ children }) => <li className="ml-2 text-gray-700">{children}</li>,
+                  h1: ({ children }) => <h1 className="text-2xl font-bold text-gray-900 mb-4 mt-6">{children}</h1>,
+                  h2: ({ children }) => <h2 className="text-xl font-bold text-gray-900 mb-3 mt-5">{children}</h2>,
+                  h3: ({ children }) => <h3 className="text-lg font-semibold text-gray-900 mb-2 mt-4">{children}</h3>,
+                  code: ({ children, className }) => {
+                    const isInline = !className;
+                    return isInline ? (
+                      <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm font-mono text-purple-600">
+                        {children}
+                      </code>
+                    ) : (
+                      <code className="block bg-gray-100 p-3 rounded text-sm font-mono overflow-x-auto mb-3">
+                        {children}
+                      </code>
+                    );
+                  },
+                  blockquote: ({ children }) => (
+                    <blockquote className="border-l-4 border-purple-500 pl-4 py-2 mb-3 text-gray-600 italic">
+                      {children}
+                    </blockquote>
+                  ),
+                  a: ({ children, href }) => (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-purple-600 hover:underline"
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              >
                 {result}
-              </div>
+              </ReactMarkdown>
             </div>
 
             <div className="mt-8 flex gap-4">

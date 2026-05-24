@@ -1,130 +1,211 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { projects, getAllTags } from "@/lib/projects";
-import ProjectCard from "@/components/ProjectCard";
 
-export default function DiscoverPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState("全部");
-  const tags = getAllTags();
-
-  const filteredProjects = projects.filter((project) => {
-    const matchesSearch =
-      searchQuery === "" ||
-      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTag = selectedTag === "全部" || project.tags.includes(selectedTag);
-    return matchesSearch && matchesTag;
-  });
-
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-paper">
       {/* Hero Section */}
-      <header className="bg-white border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <h1 className="text-3xl font-light text-text-primary mb-2">
-            AI 酋长Andy 的开源项目
+      <section className="relative bg-ink-gradient py-24 px-6 text-center overflow-hidden">
+        <div className="absolute inset-0 ink-wash opacity-30"></div>
+        <div className="relative max-w-4xl mx-auto">
+          <h1 className="title-oriental text-5xl md:text-6xl font-bold mb-6 text-paper">
+            AI 酋长
           </h1>
-          <p className="text-base text-text-muted">
-            用 AI 改变世界，让每个人都能驾驭 AI
-          </p>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-6">
-        {/* Search */}
-        <div className="relative mb-6">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
-            🔍
-          </span>
-          <input
-            type="text"
-            placeholder="搜索项目..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-white border border-border rounded-lg text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-text-muted"
-          />
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {tags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 text-sm border rounded-lg transition-colors ${
-                selectedTag === tag
-                  ? "bg-text-primary text-white border-text-primary"
-                  : "bg-white text-text-muted border-border hover:border-text-muted"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        {/* Stats */}
-        <div className="flex items-center gap-4 mb-6 text-sm text-text-muted">
-          <span>共 {projects.length} 个项目</span>
-          <span>•</span>
-          <span>{projects.reduce((sum, p) => sum + parseInt(p.stars), 0)} stars</span>
-        </div>
-
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredProjects.length === 0 ? (
-            <div className="col-span-full text-center py-12 text-text-muted">
-              <p className="text-4xl mb-3">🔍</p>
-              <p className="text-sm">没有找到相关项目</p>
-            </div>
-          ) : (
-            filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))
-          )}
-        </div>
-
-        {/* CTA Section - 企业微信引导 */}
-        <div className="mt-12 bg-white border border-border rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-light text-text-primary mb-3">
-            💬 想要更深入的交流？
+          <h2 className="text-3xl md:text-4xl font-light mb-4 text-paper/90">
+            东方智慧决策系统
           </h2>
-          <p className="text-text-muted mb-6">
-            添加 Andy 的企业微信，获取 AI 产品咨询、技术指导和项目合作机会
+          <p className="text-xl text-paper/80 mb-8 max-w-2xl mx-auto">
+            千年智慧，AI 赋能，为决策者而生
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="weixin://dl/business/?t=YOUR_ENTERPRISE_WECHAT_CODE"
-              className="px-6 py-3 bg-text-primary text-white rounded-lg text-sm hover:bg-text-secondary transition-colors"
-            >
-              添加企业微信
-            </a>
-            <span className="text-sm text-text-muted">
-              或搜索企业微信：<strong>AI PMAndy</strong>
-            </span>
+          <Link
+            href="/fortune"
+            className="inline-block btn-primary text-lg px-10 py-4 shadow-lg hover:shadow-xl"
+          >
+            开始测算
+          </Link>
+          <p className="mt-6 text-sm text-paper/60">
+            已为 100+ 企业家提供决策洞察
+          </p>
+        </div>
+      </section>
+
+      {/* Value Proposition Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
+              <div className="text-5xl mb-4">📜</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                东方智慧传承
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-2">
+                融合易经、命理、风水
+              </p>
+              <p className="text-ink-light leading-relaxed">
+                千年智慧的现代诠释
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
+              <div className="text-5xl mb-4">🤖</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                AI 科技赋能
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-2">
+                深度分析、精准洞察
+              </p>
+              <p className="text-ink-light leading-relaxed">
+                大数据驱动的智能系统
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
+              <div className="text-5xl mb-4">👔</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                决策者专属
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-2">
+                CEO、企业家定制
+              </p>
+              <p className="text-ink-light leading-relaxed">
+                高端人群的私人智囊
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Footer */}
-        <div className="mt-12 pt-8 border-t border-border text-center">
-          <p className="text-sm text-text-muted">
-            © 2026 AI 酋长Andy ·{" "}
+      {/* Pricing Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="title-oriental text-4xl font-bold text-center mb-4">
+            服务套餐
+          </h2>
+          <p className="text-center text-ink-light mb-12">
+            选择适合您的决策辅助方案
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Basic Package */}
+            <div className="card-oriental p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-2xl font-semibold mb-2">基础测算</h3>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-gold">¥299</span>
+              </div>
+              <ul className="space-y-3 mb-8 text-ink-light">
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>AI 自动生成</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>基础洞察</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>文字报告</span>
+                </li>
+              </ul>
+              <Link
+                href="/fortune?package=basic"
+                className="block w-full btn-secondary text-center"
+              >
+                立即测算
+              </Link>
+            </div>
+
+            {/* Premium Package */}
+            <div className="card-oriental p-8 hover:shadow-lg transition-shadow border-2 border-cinnabar relative">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-cinnabar text-white px-4 py-1 rounded-full text-sm">
+                推荐
+              </div>
+              <h3 className="text-2xl font-semibold mb-2">深度解读</h3>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-gold">¥999</span>
+              </div>
+              <ul className="space-y-3 mb-8 text-ink-light">
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>AI 深度分析</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>专家点评</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>PDF 报告</span>
+                </li>
+              </ul>
+              <Link
+                href="/fortune?package=premium"
+                className="block w-full btn-primary text-center"
+              >
+                立即测算
+              </Link>
+            </div>
+
+            {/* VIP Package */}
+            <div className="card-oriental p-8 hover:shadow-lg transition-shadow">
+              <h3 className="text-2xl font-semibold mb-2">至尊咨询</h3>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-gold">¥2999</span>
+              </div>
+              <ul className="space-y-3 mb-8 text-ink-light">
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>Andy 亲自解读</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>1对1 咨询</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>定制方案</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>长期跟踪</span>
+                </li>
+              </ul>
+              <Link
+                href="/fortune?package=vip"
+                className="block w-full btn-secondary text-center"
+              >
+                立即预约
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-ink-lighter">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-ink-light mb-4">
+            © 2026 AI 酋长 Andy · 东方智慧决策系统
+          </p>
+          <div className="flex justify-center gap-6 text-sm text-ink-light">
+            <Link href="/chat" className="hover:text-ink transition-colors">
+              AI 对话
+            </Link>
             <a
               href="https://github.com/AIPMAndy"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-text-primary transition-colors"
+              className="hover:text-ink transition-colors"
             >
               GitHub
             </a>
-            {" · "}
             <span>微信：AI PMAndy</span>
-          </p>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }

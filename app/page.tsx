@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Navigation from "@/components/Navigation";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-paper">
+      <Navigation />
       {/* Hero Section */}
       <section className="relative bg-ink-gradient py-24 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 ink-wash opacity-30"></div>

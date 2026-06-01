@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChatMessage as ChatMessageType, sendMessageToDifyStream } from "@/lib/dify";
 import ChatMessage from "@/components/ChatMessage";
+import Navigation from "@/components/Navigation";
 
 const WELCOME_MESSAGE: ChatMessageType = {
   id: "welcome",
@@ -91,7 +92,8 @@ function ChatContent() {
   };
 
   return (
-    <div className="min-h-screen bg-bg flex flex-col">
+    <div className="min-h-screen bg-bg flex flex-col pt-20">
+      <Navigation />
       <header className="bg-white border-b border-border">
         <div className="max-w-4xl mx-auto px-6 py-4">
           <h1 className="text-lg font-normal text-text-primary">

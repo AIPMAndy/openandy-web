@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import Navigation from "@/components/Navigation";
 
 type PackageType = "basic" | "premium" | "vip" | null;
 type Step = "package" | "payment" | "form" | "loading" | "result";
@@ -35,6 +36,7 @@ function FortuneContent() {
     gender: "",
     birthDate: "",
     birthTime: "",
+    birthPlace: "",
     question: "",
   });
   const [result, setResult] = useState("");
@@ -77,6 +79,7 @@ function FortuneContent() {
         },
         body: JSON.stringify({
           ...formData,
+          solarDate: formData.birthDate,
           package: selectedPackage,
         }),
       });
@@ -90,14 +93,29 @@ function FortuneContent() {
       setResult(data.result);
       setStep("result");
     } catch (error) {
-      setResult("❌ 服务暂时不可用，请稍后再试");
+      console.error("Fortune API error:", error);
+      setResult(`## ❌ 服务暂时不可用
+
+很抱歉，测算服务遇到了问题。
+
+**可能的原因：**
+- 服务器正在维护
+- 网络连接不稳定
+- API 配额已用完
+
+**建议：**
+- 请稍后再试
+- 或直接联系 Andy 进行人工咨询
+
+如需帮助，请添加 Andy 企业微信。`);
       setStep("result");
     }
   };
 
   return (
-    <div className="min-h-screen bg-paper py-12 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-paper">
+      <Navigation />
+      <div className="max-w-4xl mx-auto py-12 px-6 pt-32">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="title-oriental text-4xl font-bold mb-3">
@@ -161,15 +179,24 @@ function FortuneContent() {
               </div>
             </div>
 
+            <div className="mb-6 p-6 bg-amber-50 border border-amber-200 rounded-lg text-center">
+              <p className="text-sm text-amber-800 mb-2 font-semibold">
+                ⚠️ 开发阶段 - 模拟支付
+              </p>
+              <p className="text-xs text-amber-700">
+                当前为产品测试阶段，支付功能尚未开通
+              </p>
+            </div>
+
             <div className="mb-6 p-6 bg-ink-lighter/20 rounded-lg text-center">
               <p className="text-sm text-ink-light mb-4">
-                扫码支付（模拟）
+                正式上线后将支持
               </p>
               <div className="w-48 h-48 mx-auto bg-white border-2 border-ink-lighter rounded-lg flex items-center justify-center">
                 <span className="text-ink-light">支付二维码</span>
               </div>
               <p className="text-xs text-ink-light mt-4">
-                支持支付宝 / 微信支付
+                支付宝 / 微信支付 / 企业转账
               </p>
             </div>
 
@@ -177,7 +204,7 @@ function FortuneContent() {
               onClick={handlePaymentComplete}
               className="w-full btn-primary mb-3"
             >
-              模拟支付完成
+              继续体验（跳过支付）
             </button>
             <button
               onClick={() => setStep("package")}
@@ -261,6 +288,20 @@ function FortuneContent() {
 
               <div>
                 <label className="block text-sm font-medium text-ink mb-2">
+                  出生地（选填）
+                </label>
+                <input
+                  type="text"
+                  name="birthPlace"
+                  value={formData.birthPlace}
+                  onChange={handleChange}
+                  placeholder="例如：北京市"
+                  className="input-oriental"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-ink mb-2">
                   您当前面临的问题或决策
                 </label>
                 <textarea
@@ -283,13 +324,21 @@ function FortuneContent() {
         {/* Step 4: Loading */}
         {step === "loading" && (
           <div className="card-oriental p-12 text-center">
-            <div className="animate-spin w-16 h-16 border-4 border-ink-lighter border-t-cinnabar rounded-full mx-auto mb-6"></div>
-            <p className="text-xl text-ink-light">
+            <div className="relative w-24 h-24 mx-auto mb-8">
+              <div className="absolute inset-0 animate-spin w-24 h-24 border-4 border-ink-lighter border-t-cinnabar rounded-full"></div>
+              <div className="absolute inset-2 animate-pulse w-20 h-20 border-2 border-gold/30 rounded-full"></div>
+            </div>
+            <p className="text-2xl font-semibold text-ink mb-3">
               AI 酋长正在为您解读天机...
             </p>
-            <p className="text-sm text-ink-light mt-2">
+            <p className="text-sm text-ink-light mb-6">
               预计需要 30-60 秒
             </p>
+            <div className="max-w-md mx-auto space-y-2 text-xs text-ink-light">
+              <p className="animate-pulse">📊 分析生辰八字...</p>
+              <p className="animate-pulse delay-300">🔮 推演命理格局...</p>
+              <p className="animate-pulse delay-500">✨ 生成决策建议...</p>
+            </div>
           </div>
         )}
 
@@ -396,6 +445,7 @@ function FortuneContent() {
                     gender: "",
                     birthDate: "",
                     birthTime: "",
+                    birthPlace: "",
                     question: "",
                   });
                   setResult("");

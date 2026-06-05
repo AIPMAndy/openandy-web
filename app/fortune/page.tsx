@@ -5,30 +5,33 @@ import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Navigation from "@/components/Navigation";
+import { useLocale } from "@/contexts/LocaleContext";
 
 type PackageType = "basic" | "premium" | "vip" | null;
 type Step = "package" | "payment" | "form" | "loading" | "result";
 
-const packages = {
-  basic: {
-    name: "基础测算",
-    price: 299,
-    features: ["AI 自动生成", "基础洞察", "文字报告"],
-  },
-  premium: {
-    name: "深度解读",
-    price: 999,
-    features: ["AI 深度分析", "专家点评", "PDF 报告"],
-  },
-  vip: {
-    name: "至尊咨询",
-    price: 2999,
-    features: ["Andy 亲自解读", "1对1 咨询", "定制方案", "长期跟踪"],
-  },
-};
-
 function FortuneContent() {
   const searchParams = useSearchParams();
+  const { t, locale } = useLocale();
+
+  const packages = {
+    basic: {
+      name: t.home.pricing.basic.name,
+      price: locale === 'en' ? 49 : 299,
+      features: t.home.pricing.basic.features,
+    },
+    premium: {
+      name: t.home.pricing.premium.name,
+      price: locale === 'en' ? 149 : 999,
+      features: t.home.pricing.premium.features,
+    },
+    vip: {
+      name: t.home.pricing.vip.name,
+      price: locale === 'en' ? 499 : 2999,
+      features: t.home.pricing.vip.features,
+    },
+  };
+
   const [step, setStep] = useState<Step>("package");
   const [selectedPackage, setSelectedPackage] = useState<PackageType>(null);
   const [formData, setFormData] = useState({
@@ -81,33 +84,34 @@ function FortuneContent() {
           ...formData,
           solarDate: formData.birthDate,
           package: selectedPackage,
+          locale,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "测算失败");
+        throw new Error(data.error || "Analysis failed");
       }
 
       setResult(data.result);
       setStep("result");
     } catch (error) {
       console.error("Fortune API error:", error);
-      setResult(`## ❌ 服务暂时不可用
+      setResult(`${t.fortune.error.title}
 
-很抱歉，测算服务遇到了问题。
+${t.fortune.error.sorry}
 
-**可能的原因：**
-- 服务器正在维护
-- 网络连接不稳定
-- API 配额已用完
+${t.fortune.error.reasons}
+${t.fortune.error.reason1}
+${t.fortune.error.reason2}
+${t.fortune.error.reason3}
 
-**建议：**
-- 请稍后再试
-- 或直接联系 Andy 进行人工咨询
+${t.fortune.error.suggestions}
+${t.fortune.error.suggestion1}
+${t.fortune.error.suggestion2}
 
-如需帮助，请添加 Andy 企业微信。`);
+${t.fortune.error.contact}`);
       setStep("result");
     }
   };
@@ -119,10 +123,10 @@ function FortuneContent() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="title-oriental text-4xl font-bold mb-3">
-            天机测算
+            {t.fortune.title}
           </h1>
           <p className="text-ink-light">
-            融合东方智慧与 AI 洞察，为您的重大决策提供指引
+            {t.fortune.subtitle}
           </p>
         </div>
 
@@ -130,7 +134,7 @@ function FortuneContent() {
         {step === "package" && (
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold text-center mb-8">
-              选择您的服务套餐
+              {t.fortune.selectPackage}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.entries(packages).map(([key, pkg]) => (
@@ -141,7 +145,7 @@ function FortuneContent() {
                 >
                   <h3 className="text-xl font-semibold mb-2">{pkg.name}</h3>
                   <div className="text-3xl font-bold text-gold mb-4">
-                    ¥{pkg.price}
+                    {t.common.currency}{pkg.price}
                   </div>
                   <ul className="space-y-2 mb-6 text-ink-light text-sm">
                     {pkg.features.map((feature, idx) => (
@@ -151,7 +155,9 @@ function FortuneContent() {
                       </li>
                     ))}
                   </ul>
-                  <button className="w-full btn-primary">选择此套餐</button>
+                  <button className="w-full btn-primary">
+                    {key === 'vip' ? t.home.pricing.vip.cta : t.home.pricing.basic.cta}
+                  </button>
                 </div>
               ))}
             </div>
@@ -162,41 +168,41 @@ function FortuneContent() {
         {step === "payment" && selectedPackage && (
           <div className="card-oriental p-8 max-w-md mx-auto">
             <h2 className="text-2xl font-semibold mb-6 text-center">
-              确认订单
+              {t.fortune.payment.title}
             </h2>
             <div className="mb-6 p-4 bg-paper rounded-lg">
               <div className="flex justify-between mb-2">
-                <span className="text-ink-light">套餐</span>
+                <span className="text-ink-light">{t.fortune.payment.package}</span>
                 <span className="font-semibold">
                   {packages[selectedPackage].name}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-ink-light">金额</span>
+                <span className="text-ink-light">{t.fortune.payment.amount}</span>
                 <span className="text-2xl font-bold text-gold">
-                  ¥{packages[selectedPackage].price}
+                  {t.common.currency}{packages[selectedPackage].price}
                 </span>
               </div>
             </div>
 
             <div className="mb-6 p-6 bg-amber-50 border border-amber-200 rounded-lg text-center">
               <p className="text-sm text-amber-800 mb-2 font-semibold">
-                ⚠️ 开发阶段 - 模拟支付
+                {t.fortune.payment.devNotice}
               </p>
               <p className="text-xs text-amber-700">
-                当前为产品测试阶段，支付功能尚未开通
+                {t.fortune.payment.devDesc}
               </p>
             </div>
 
             <div className="mb-6 p-6 bg-ink-lighter/20 rounded-lg text-center">
               <p className="text-sm text-ink-light mb-4">
-                正式上线后将支持
+                {t.fortune.payment.willSupport}
               </p>
               <div className="w-48 h-48 mx-auto bg-white border-2 border-ink-lighter rounded-lg flex items-center justify-center">
-                <span className="text-ink-light">支付二维码</span>
+                <span className="text-ink-light">{t.fortune.payment.title}</span>
               </div>
               <p className="text-xs text-ink-light mt-4">
-                支付宝 / 微信支付 / 企业转账
+                {t.fortune.payment.paymentMethods}
               </p>
             </div>
 
@@ -204,13 +210,13 @@ function FortuneContent() {
               onClick={handlePaymentComplete}
               className="w-full btn-primary mb-3"
             >
-              继续体验（跳过支付）
+              {t.fortune.payment.continueBtn}
             </button>
             <button
               onClick={() => setStep("package")}
               className="w-full btn-secondary"
             >
-              返回选择套餐
+              {t.fortune.payment.backBtn}
             </button>
           </div>
         )}
@@ -219,20 +225,20 @@ function FortuneContent() {
         {step === "form" && (
           <div className="card-oriental p-8">
             <h2 className="text-2xl font-semibold mb-6 text-center">
-              填写您的信息
+              {t.fortune.form.title}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-ink mb-2">
-                    姓名 <span className="text-cinnabar">*</span>
+                    {t.fortune.form.name} <span className="text-cinnabar">{t.fortune.form.required}</span>
                   </label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="请输入姓名"
+                    placeholder={t.fortune.form.namePlaceholder}
                     className="input-oriental"
                     required
                   />
@@ -240,7 +246,7 @@ function FortuneContent() {
 
                 <div>
                   <label className="block text-sm font-medium text-ink mb-2">
-                    性别 <span className="text-cinnabar">*</span>
+                    {t.fortune.form.gender} <span className="text-cinnabar">{t.fortune.form.required}</span>
                   </label>
                   <select
                     name="gender"
@@ -249,9 +255,9 @@ function FortuneContent() {
                     className="input-oriental"
                     required
                   >
-                    <option value="">请选择</option>
-                    <option value="男">男</option>
-                    <option value="女">女</option>
+                    <option value="">{t.fortune.form.genderSelect}</option>
+                    <option value={t.fortune.form.male}>{t.fortune.form.male}</option>
+                    <option value={t.fortune.form.female}>{t.fortune.form.female}</option>
                   </select>
                 </div>
               </div>
@@ -259,7 +265,7 @@ function FortuneContent() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-ink mb-2">
-                    出生日期 <span className="text-cinnabar">*</span>
+                    {t.fortune.form.birthDate} <span className="text-cinnabar">{t.fortune.form.required}</span>
                   </label>
                   <input
                     type="date"
@@ -273,7 +279,7 @@ function FortuneContent() {
 
                 <div>
                   <label className="block text-sm font-medium text-ink mb-2">
-                    出生时间 <span className="text-cinnabar">*</span>
+                    {t.fortune.form.birthTime} <span className="text-cinnabar">{t.fortune.form.required}</span>
                   </label>
                   <input
                     type="time"
@@ -288,34 +294,34 @@ function FortuneContent() {
 
               <div>
                 <label className="block text-sm font-medium text-ink mb-2">
-                  出生地（选填）
+                  {t.fortune.form.birthPlace}
                 </label>
                 <input
                   type="text"
                   name="birthPlace"
                   value={formData.birthPlace}
                   onChange={handleChange}
-                  placeholder="例如：北京市"
+                  placeholder={t.fortune.form.birthPlacePlaceholder}
                   className="input-oriental"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-ink mb-2">
-                  您当前面临的问题或决策
+                  {t.fortune.form.question}
                 </label>
                 <textarea
                   name="question"
                   value={formData.question}
                   onChange={handleChange}
-                  placeholder="例如：事业发展方向、重大投资决策、人生规划..."
+                  placeholder={t.fortune.form.questionPlaceholder}
                   rows={4}
                   className="input-oriental resize-none"
                 />
               </div>
 
               <button type="submit" className="w-full btn-primary text-lg py-4">
-                开始测算
+                {t.fortune.form.submitBtn}
               </button>
             </form>
           </div>
@@ -329,15 +335,15 @@ function FortuneContent() {
               <div className="absolute inset-2 animate-pulse w-20 h-20 border-2 border-gold/30 rounded-full"></div>
             </div>
             <p className="text-2xl font-semibold text-ink mb-3">
-              AI 酋长正在为您解读天机...
+              {t.fortune.loading.title}
             </p>
             <p className="text-sm text-ink-light mb-6">
-              预计需要 30-60 秒
+              {t.fortune.loading.estimate}
             </p>
             <div className="max-w-md mx-auto space-y-2 text-xs text-ink-light">
-              <p className="animate-pulse">📊 分析生辰八字...</p>
-              <p className="animate-pulse delay-300">🔮 推演命理格局...</p>
-              <p className="animate-pulse delay-500">✨ 生成决策建议...</p>
+              <p className="animate-pulse">{t.fortune.loading.step1}</p>
+              <p className="animate-pulse delay-300">{t.fortune.loading.step2}</p>
+              <p className="animate-pulse delay-500">{t.fortune.loading.step3}</p>
             </div>
           </div>
         )}
@@ -347,7 +353,7 @@ function FortuneContent() {
           <div className="space-y-8">
             <div className="card-oriental p-8">
               <h2 className="title-oriental text-2xl font-bold mb-6 text-center">
-                您的天机测算结果
+                {t.fortune.result.title}
               </h2>
               <div className="prose prose-sm max-w-none">
                 <ReactMarkdown
@@ -391,47 +397,50 @@ function FortuneContent() {
             {/* Referral Section */}
             <div className="card-oriental p-8 text-center">
               <h3 className="text-2xl font-semibold mb-4">
-                想要更深入的解读？
+                {t.fortune.result.ctaTitle}
               </h3>
               <p className="text-ink-light mb-6">
-                AI 测算只是开始，真正的智慧在于深度对话
+                {t.fortune.result.ctaDesc}
               </p>
 
               <div className="max-w-md mx-auto mb-6">
                 <div className="w-48 h-48 mx-auto bg-ink-lighter/20 border-2 border-ink-lighter rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-ink-light">Andy 企业微信二维码</span>
+                  <span className="text-ink-light">{locale === 'en' ? 'Contact QR Code' : 'Andy 企业微信二维码'}</span>
                 </div>
                 <p className="text-sm text-ink-light mb-2">
-                  <strong>AI 酋长 Andy</strong>
+                  <strong>{t.fortune.result.qrTitle}</strong>
+                </p>
+                <p className="text-xs text-ink-light mb-4">
+                  {t.fortune.result.qrDesc}
                 </p>
                 <p className="text-xs text-ink-light">
-                  10+ 年企业家决策顾问经验
+                  {t.common.email}: andy@aipm.io
                 </p>
               </div>
 
               <div className="bg-paper p-6 rounded-lg mb-6 text-left">
-                <p className="font-semibold mb-3">Andy 亲自为您：</p>
+                <p className="font-semibold mb-3">{t.fortune.result.benefits.title}</p>
                 <ul className="space-y-2 text-sm text-ink-light">
                   <li className="flex items-start">
                     <span className="mr-2">•</span>
-                    <span>深度解读测算结果背后的玄机</span>
+                    <span>{t.fortune.result.benefits.item1}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2">•</span>
-                    <span>结合您的实际情况提供定制建议</span>
+                    <span>{t.fortune.result.benefits.item2}</span>
                   </li>
                   <li className="flex items-start">
                     <span className="mr-2">•</span>
-                    <span>长期跟踪指导，助您把握关键决策</span>
+                    <span>{t.fortune.result.benefits.item3}</span>
                   </li>
                 </ul>
               </div>
 
               <button className="btn-primary mb-3">
-                预约深度咨询
+                {t.fortune.result.bookBtn}
               </button>
               <p className="text-xs text-ink-light">
-                已有 50+ 企业家通过深度咨询获得突破
+                {t.fortune.result.testimonial}
               </p>
             </div>
 
@@ -452,13 +461,13 @@ function FortuneContent() {
                 }}
                 className="flex-1 btn-secondary"
               >
-                再测一次
+                {t.fortune.result.retryBtn}
               </button>
               <a
                 href="/"
                 className="flex-1 btn-primary text-center"
               >
-                返回首页
+                {t.fortune.result.homeBtn}
               </a>
             </div>
           </div>
@@ -474,7 +483,7 @@ export default function FortunePage() {
       <div className="min-h-screen bg-paper flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin w-16 h-16 border-4 border-ink-lighter border-t-cinnabar rounded-full mx-auto mb-4"></div>
-          <p className="text-ink-light">加载中...</p>
+          <p className="text-ink-light">Loading...</p>
         </div>
       </div>
     }>

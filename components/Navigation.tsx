@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLocale } from "@/contexts/LocaleContext";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { locale, t, setLocale } = useLocale();
 
   const navItems = [
-    { href: "/", label: "首页" },
-    { href: "/fortune", label: "天机测算" },
-    { href: "/chat", label: "AI 对话" },
+    { href: "/", label: t.nav.home },
+    { href: "/fortune", label: t.nav.fortune },
+    { href: "/chat", label: t.nav.chat },
   ];
 
   return (
@@ -17,7 +19,9 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-ink">AI 酋长 Andy</span>
+            <span className="text-2xl font-bold text-ink">
+              {locale === 'en' ? 'AI Chief Andy' : 'AI 酋长 Andy'}
+            </span>
           </Link>
 
           <div className="flex items-center gap-8">
@@ -34,6 +38,31 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
+
+            {/* Language Switcher */}
+            <div className="flex items-center gap-2 ml-4 border-l border-ink-lighter pl-4">
+              <button
+                onClick={() => setLocale('zh')}
+                className={`text-sm transition-colors ${
+                  locale === 'zh'
+                    ? 'text-cinnabar font-semibold'
+                    : 'text-ink-light hover:text-ink'
+                }`}
+              >
+                中文
+              </button>
+              <span className="text-ink-lighter">|</span>
+              <button
+                onClick={() => setLocale('en')}
+                className={`text-sm transition-colors ${
+                  locale === 'en'
+                    ? 'text-cinnabar font-semibold'
+                    : 'text-ink-light hover:text-ink'
+                }`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </div>

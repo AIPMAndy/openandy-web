@@ -1,0 +1,362 @@
+export type Locale = 'en' | 'zh';
+
+export const translations = {
+  en: {
+    // Navigation
+    nav: {
+      home: 'Home',
+      fortune: 'AI Insights',
+      chat: 'AI Chat',
+    },
+
+    // Home Page
+    home: {
+      title: 'AI Chief Andy',
+      subtitle: 'AI-Powered Strategic Insights',
+      description: 'Ancient wisdom meets AI intelligence, designed for decision-makers',
+      cta: 'Get Started',
+      testimonial: 'Trusted by 100+ business leaders',
+
+      // Value Props
+      valueProps: {
+        wisdom: {
+          title: 'Ancient Wisdom',
+          desc1: 'Integrating I Ching, Chinese astrology',
+          desc2: 'Modern interpretation of timeless insights',
+        },
+        ai: {
+          title: 'AI Empowered',
+          desc1: 'Deep analysis, precise insights',
+          desc2: 'Data-driven intelligence system',
+        },
+        exclusive: {
+          title: 'For Leaders',
+          desc1: 'Tailored for CEOs & entrepreneurs',
+          desc2: 'Private intelligence for elite decision-makers',
+        },
+      },
+
+      // Pricing
+      pricing: {
+        title: 'Service Packages',
+        subtitle: 'Choose your strategic guidance plan',
+        basic: {
+          name: 'Basic Reading',
+          features: ['AI-generated insights', 'Core analysis', 'Text report'],
+          cta: 'Get Reading',
+        },
+        premium: {
+          name: 'Deep Analysis',
+          badge: 'Popular',
+          features: ['AI deep analysis', 'Expert commentary', 'PDF report'],
+          cta: 'Get Reading',
+        },
+        vip: {
+          name: 'Premium Consultation',
+          features: ['Personal consultation with Andy', '1-on-1 session', 'Custom strategy', 'Long-term guidance'],
+          cta: 'Book Now',
+        },
+      },
+
+      // Footer
+      footer: {
+        copyright: '© 2026 AI Chief Andy · AI-Powered Strategic Insights',
+        aiChat: 'AI Chat',
+      },
+    },
+
+    // Fortune Page
+    fortune: {
+      title: 'AI Strategic Insights',
+      subtitle: 'Combining ancient wisdom with AI analysis for your critical decisions',
+
+      // Package Selection
+      selectPackage: 'Choose Your Service Package',
+
+      // Payment
+      payment: {
+        title: 'Confirm Order',
+        package: 'Package',
+        amount: 'Amount',
+        devNotice: '⚠️ Development Stage - Demo Mode',
+        devDesc: 'Payment integration is under development',
+        willSupport: 'Will support upon official launch',
+        paymentMethods: 'Stripe / PayPal / Credit Card',
+        continueBtn: 'Continue (Skip Payment)',
+        backBtn: 'Back to Packages',
+      },
+
+      // Form
+      form: {
+        title: 'Your Information',
+        name: 'Name',
+        namePlaceholder: 'Enter your name',
+        gender: 'Gender',
+        genderSelect: 'Please select',
+        male: 'Male',
+        female: 'Female',
+        birthDate: 'Birth Date',
+        birthTime: 'Birth Time',
+        birthPlace: 'Birth Place (Optional)',
+        birthPlacePlaceholder: 'e.g., New York',
+        question: 'Your Current Challenge or Decision',
+        questionPlaceholder: 'e.g., Career direction, major investment, life planning...',
+        submitBtn: 'Start Analysis',
+        required: '*',
+      },
+
+      // Loading
+      loading: {
+        title: 'AI Chief is analyzing your insights...',
+        estimate: 'Estimated time: 30-60 seconds',
+        step1: '📊 Analyzing birth chart...',
+        step2: '🔮 Computing destiny patterns...',
+        step3: '✨ Generating strategic insights...',
+      },
+
+      // Result
+      result: {
+        title: 'Your Strategic Insights',
+        ctaTitle: 'Want Deeper Analysis?',
+        ctaDesc: 'AI insights are just the beginning, true wisdom comes from deep dialogue',
+        qrTitle: 'AI Chief Andy',
+        qrDesc: '10+ years of strategic advisory experience',
+        benefits: {
+          title: 'Andy personally provides:',
+          item1: 'Deep interpretation of insights behind the analysis',
+          item2: 'Customized recommendations for your specific situation',
+          item3: 'Long-term guidance to seize critical decisions',
+        },
+        bookBtn: 'Book Deep Consultation',
+        testimonial: '50+ business leaders gained breakthroughs through deep consultation',
+        retryBtn: 'New Reading',
+        homeBtn: 'Back Home',
+      },
+
+      // Error
+      error: {
+        title: '## ❌ Service Temporarily Unavailable',
+        sorry: 'We apologize, the analysis service encountered an issue.',
+        reasons: '**Possible reasons:**',
+        reason1: '- Server maintenance',
+        reason2: '- Network connection unstable',
+        reason3: '- API quota exceeded',
+        suggestions: '**Suggestions:**',
+        suggestion1: '- Please try again later',
+        suggestion2: '- Or contact Andy directly for personal consultation',
+        contact: 'For assistance, please contact Andy.',
+      },
+    },
+
+    // Chat Page
+    chat: {
+      title: '💬 Chat with AI Chief Andy',
+      subtitle: 'Trained on Andy\'s public projects and content, AI-generated responses',
+      welcome: `Hello! I'm AI Chief Andy's AI assistant 🤖
+
+Trained on Andy's public projects and content, I can help you:
+
+• Learn about Andy's open-source projects
+• Answer AI product questions
+• Share technical learning paths
+• Provide project usage guidance
+
+What would you like to know?`,
+      placeholder: 'Type your question...',
+      sendBtn: 'Send',
+    },
+
+    // Common
+    common: {
+      currency: '$',
+      wechat: 'WeChat',
+      email: 'Email',
+      whatsapp: 'WhatsApp',
+      telegram: 'Telegram',
+    },
+  },
+
+  zh: {
+    // Navigation
+    nav: {
+      home: '首页',
+      fortune: '天机测算',
+      chat: 'AI 对话',
+    },
+
+    // Home Page
+    home: {
+      title: 'AI 酋长',
+      subtitle: '东方智慧决策系统',
+      description: '千年智慧，AI 赋能，为决策者而生',
+      cta: '开始测算',
+      testimonial: '已为 100+ 企业家提供决策洞察',
+
+      valueProps: {
+        wisdom: {
+          title: '东方智慧传承',
+          desc1: '融合易经、命理、风水',
+          desc2: '千年智慧的现代诠释',
+        },
+        ai: {
+          title: 'AI 科技赋能',
+          desc1: '深度分析、精准洞察',
+          desc2: '大数据驱动的智能系统',
+        },
+        exclusive: {
+          title: '决策者专属',
+          desc1: 'CEO、企业家定制',
+          desc2: '高端人群的私人智囊',
+        },
+      },
+
+      pricing: {
+        title: '服务套餐',
+        subtitle: '选择适合您的决策辅助方案',
+        basic: {
+          name: '基础测算',
+          features: ['AI 自动生成', '基础洞察', '文字报告'],
+          cta: '立即测算',
+        },
+        premium: {
+          name: '深度解读',
+          badge: '推荐',
+          features: ['AI 深度分析', '专家点评', 'PDF 报告'],
+          cta: '立即测算',
+        },
+        vip: {
+          name: '至尊咨询',
+          features: ['Andy 亲自解读', '1对1 咨询', '定制方案', '长期跟踪'],
+          cta: '立即预约',
+        },
+      },
+
+      footer: {
+        copyright: '© 2026 AI 酋长 Andy · 东方智慧决策系统',
+        aiChat: 'AI 对话',
+      },
+    },
+
+    fortune: {
+      title: '天机测算',
+      subtitle: '融合东方智慧与 AI 洞察，为您的重大决策提供指引',
+      selectPackage: '选择您的服务套餐',
+
+      payment: {
+        title: '确认订单',
+        package: '套餐',
+        amount: '金额',
+        devNotice: '⚠️ 开发阶段 - 模拟支付',
+        devDesc: '当前为产品测试阶段，支付功能尚未开通',
+        willSupport: '正式上线后将支持',
+        paymentMethods: '支付宝 / 微信支付 / 企业转账',
+        continueBtn: '继续体验（跳过支付）',
+        backBtn: '返回选择套餐',
+      },
+
+      form: {
+        title: '填写您的信息',
+        name: '姓名',
+        namePlaceholder: '请输入姓名',
+        gender: '性别',
+        genderSelect: '请选择',
+        male: '男',
+        female: '女',
+        birthDate: '出生日期',
+        birthTime: '出生时间',
+        birthPlace: '出生地（选填）',
+        birthPlacePlaceholder: '例如：北京市',
+        question: '您当前面临的问题或决策',
+        questionPlaceholder: '例如：事业发展方向、重大投资决策、人生规划...',
+        submitBtn: '开始测算',
+        required: '*',
+      },
+
+      loading: {
+        title: 'AI 酋长正在为您解读天机...',
+        estimate: '预计需要 30-60 秒',
+        step1: '📊 分析生辰八字...',
+        step2: '🔮 推演命理格局...',
+        step3: '✨ 生成决策建议...',
+      },
+
+      result: {
+        title: '您的天机测算结果',
+        ctaTitle: '想要更深入的解读？',
+        ctaDesc: 'AI 测算只是开始，真正的智慧在于深度对话',
+        qrTitle: 'AI 酋长 Andy',
+        qrDesc: '10+ 年企业家决策顾问经验',
+        benefits: {
+          title: 'Andy 亲自为您：',
+          item1: '深度解读测算结果背后的玄机',
+          item2: '结合您的实际情况提供定制建议',
+          item3: '长期跟踪指导，助您把握关键决策',
+        },
+        bookBtn: '预约深度咨询',
+        testimonial: '已有 50+ 企业家通过深度咨询获得突破',
+        retryBtn: '再测一次',
+        homeBtn: '返回首页',
+      },
+
+      error: {
+        title: '## ❌ 服务暂时不可用',
+        sorry: '很抱歉，测算服务遇到了问题。',
+        reasons: '**可能的原因：**',
+        reason1: '- 服务器正在维护',
+        reason2: '- 网络连接不稳定',
+        reason3: '- API 配额已用完',
+        suggestions: '**建议：**',
+        suggestion1: '- 请稍后再试',
+        suggestion2: '- 或直接联系 Andy 进行人工咨询',
+        contact: '如需帮助，请添加 Andy 企业微信。',
+      },
+    },
+
+    chat: {
+      title: '💬 与 AI酋长Andy 对话',
+      subtitle: '基于Andy的公开项目和内容训练，内容由AI生成',
+      welcome: `你好！我是 AI酋长Andy 的 AI 分身 🤖
+
+基于 Andy 的公开项目和内容训练而成，可以帮你：
+
+• 了解 Andy 的开源项目
+• 解答 AI 产品相关问题
+• 分享技术学习路径
+• 提供项目使用建议
+
+有什么想问的，尽管说～`,
+      placeholder: '输入你的问题...',
+      sendBtn: '发送',
+    },
+
+    common: {
+      currency: '¥',
+      wechat: '微信',
+      email: '邮箱',
+      whatsapp: 'WhatsApp',
+      telegram: 'Telegram',
+    },
+  },
+};
+
+export function getTranslation(locale: Locale) {
+  return translations[locale] || translations.zh;
+}
+
+export function detectLocale(): Locale {
+  if (typeof window === 'undefined') return 'zh';
+
+  const stored = localStorage.getItem('locale') as Locale;
+  if (stored && (stored === 'en' || stored === 'zh')) return stored;
+
+  const browserLang = navigator.language.toLowerCase();
+  if (browserLang.startsWith('zh')) return 'zh';
+
+  return 'en';
+}
+
+export function setLocale(locale: Locale) {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('locale', locale);
+  }
+}

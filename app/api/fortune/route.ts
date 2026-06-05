@@ -1,31 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  try {
-    const formData = await request.json();
-    const { name, gender, solarDate, birthTime } = formData;
+  const formData = await request.json();
+  const { name, gender, solarDate, birthTime, locale = 'zh' } = formData;
 
-    // 必填字段校验
+  // Get translation based on locale
+  const messages = locale === 'en' ? {
+    errorRequired: 'Please fill in all required fields: Name, Gender, Birth Date, Birth Time',
+    errorConfig: 'Service configuration error',
+    errorUnavailable: 'Analysis service temporarily unavailable',
+    errorRetry: 'Analysis failed, please try again',
+  } : {
+    errorRequired: '请填写必填信息：姓名、性别、公历出生日期、出生时间',
+    errorConfig: '服务配置错误',
+    errorUnavailable: '算命服务暂时不可用',
+    errorRetry: '算命失败，请重试',
+  };
+
+  try {
+
+    // Required field validation
     if (!name || !gender || !solarDate || !birthTime) {
       return NextResponse.json(
-        { error: "请填写必填信息：姓名、性别、公历出生日期、出生时间" },
+        { error: messages.errorRequired },
         { status: 400 }
       );
     }
 
-    // DeepSeek API 配置
+    // DeepSeek API configuration
     const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY;
     const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
 
     if (!DEEPSEEK_API_KEY) {
       return NextResponse.json(
-        { error: "服务配置错误" },
+        { error: messages.errorConfig },
         { status: 500 }
       );
     }
 
-    // 算命 Prompt
-    const systemPrompt = `你现在是一位专业的中国传统四柱八字命理研究者，熟读并综合参考《穷通宝鉴》《三命通会》《滴天髓》《渊海子平》《千里命稿》《协纪辨方书》《果老星宗》《子平真诠》《神峰通考》等经典命理著作。你擅长结合传统命理理论、排盘规则、十神生克、格局喜忌、旺衰流通、大运流年等方法，对命盘进行系统、细致、可验证的分析。
+    // AI Prompt - Chinese version
+    const systemPromptZh = `你现在是一位专业的中国传统四柱八字命理研究者，熟读并综合参考《穷通宝鉴》《三命通会》《滴天髓》《渊海子平》《千里命稿》《协纪辨方书》《果老星宗》《子平真诠》《神峰通考》等经典命理著作。你擅长结合传统命理理论、排盘规则、十神生克、格局喜忌、旺衰流通、大运流年等方法，对命盘进行系统、细致、可验证的分析。
 
 【排运规则】
 排大运分阴年、阳年。
@@ -52,9 +66,31 @@ export async function POST(request: NextRequest) {
 最后添加：
 ---
 💬 想深度交流 AI 产品、职业规划、个人成长？
-加微信 **AIPMAndy** 一对一咨询`;
+联系邮箱 **andy@aipm.io**`;
 
-    const userPrompt = `【个人信息】
+    // AI Prompt - English version
+    const systemPromptEn = `You are a professional analyst specializing in Chinese traditional Four Pillars (BaZi) astrology and I Ching wisdom. You have studied classic texts including Qiong Tong Bao Jian, San Ming Tong Hui, Di Tian Sui, Yuan Hai Zi Ping, and other authoritative works. You excel at systematic analysis combining traditional principles, the Five Elements theory, Yin-Yang dynamics, and life cycle patterns.
+
+Please provide your analysis in the following structure:
+1. Four Pillars Chart: Display the Year, Month, Day, and Hour pillars with their elements.
+2. Core Analysis: Assess the Day Master's strength, elemental balance, favorable/unfavorable elements, and explain your reasoning.
+3. Personality & Thinking Patterns: Analyze the Ten Gods configuration to reveal character traits, thinking style, interpersonal approach, strengths and weaknesses.
+4. Life Dimensions: Provide specific insights on career, wealth, relationships, family, health. Be concrete, avoid generic statements.
+5. Life Phases: Analyze different life stages through Major Luck cycles and yearly influences, highlighting opportunities, turning points, challenges.
+6. Historical Verification: Provide predictions for key past events with specific years and ages for validation.
+7. Event Timing: Explain why certain events occurred at specific life stages based on the chart dynamics.
+8. Summary: Core chart characteristics, major risk areas, optimal development directions, critical years or periods.
+
+Requirements: Write in a professional yet accessible tone. Base conclusions on clear reasoning. Be balanced—neither overly optimistic nor alarmist. Keep structure clear with detailed insights.
+
+End with:
+---
+💬 Want deeper consultation on AI strategy, career planning, or personal growth?
+Contact **andy@aipm.io**`;
+
+    const systemPrompt = locale === 'en' ? systemPromptEn : systemPromptZh;
+
+    const userPromptZh = `【个人信息】
 姓名：${formData.name}
 曾用名：${formData.formerName || '无'}
 性别：${formData.gender}
@@ -69,7 +105,24 @@ ${formData.question ? `想问的问题：${formData.question}` : ''}
 
 请为我进行四柱八字分析。`;
 
-    // 调用 DeepSeek API
+    const userPromptEn = `【Personal Information】
+Name: ${formData.name}
+Former Name: ${formData.formerName || 'N/A'}
+Gender: ${formData.gender}
+Living Status: ${formData.isAlive || 'Living'}
+Birth Place: ${formData.birthPlace || 'Not provided'}
+Solar Birth Date: ${formData.solarDate}
+Lunar Birth Date: ${formData.lunarDate || 'Not provided'}
+Birth Time: ${formData.birthTime}
+Current Year: ${formData.currentYear || new Date().getFullYear()}
+
+${formData.question ? `Question: ${formData.question}` : ''}
+
+Please provide a Four Pillars (BaZi) analysis for me.`;
+
+    const userPrompt = locale === 'en' ? userPromptEn : userPromptZh;
+
+    // Call DeepSeek API
     const response = await fetch(DEEPSEEK_API_URL, {
       method: "POST",
       headers: {
@@ -91,19 +144,19 @@ ${formData.question ? `想问的问题：${formData.question}` : ''}
       const error = await response.text();
       console.error("DeepSeek API error:", error);
       return NextResponse.json(
-        { error: "算命服务暂时不可用" },
+        { error: messages.errorUnavailable },
         { status: 500 }
       );
     }
 
     const data = await response.json();
-    const result = data.choices[0]?.message?.content || "算命失败，请重试";
+    const result = data.choices[0]?.message?.content || messages.errorRetry;
 
     return NextResponse.json({ result });
   } catch (error) {
     console.error("Fortune API error:", error);
     return NextResponse.json(
-      { error: "服务器错误" },
+      { error: messages.errorConfig },
       { status: 500 }
     );
   }

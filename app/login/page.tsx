@@ -3,16 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { saveUserProfile } from "@/lib/storage";
+import { useLocale } from "@/contexts/LocaleContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useLocale();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = () => {
     setIsLoading(true);
     setTimeout(() => {
       saveUserProfile({
-        name: "学习者",
+        name: "User",
         avatar: "👨‍💻",
         isLoggedIn: true,
       });
@@ -28,35 +30,35 @@ export default function LoginPage() {
             🎯
           </div>
           <h1 className="text-2xl font-light text-text-primary mb-2">
-            醒觉AI学习打卡
+            {t.login.title}
           </h1>
-          <p className="text-sm text-text-muted">AI酋长Andy 出品</p>
+          <p className="text-sm text-text-muted">{t.login.subtitle}</p>
         </div>
 
         <div className="bg-white border border-border p-6 mb-8">
           <h2 className="text-base font-normal text-text-primary mb-4">
-            核心功能
+            {t.login.features.title}
           </h2>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <span className="text-xl">🔍</span>
+              <span className="text-xl">🔮</span>
               <div>
-                <p className="text-sm text-text-primary">发现优质AI项目</p>
-                <p className="text-xs text-text-muted">精选15+开源AI项目推荐</p>
+                <p className="text-sm text-text-primary">{t.login.features.reading.title}</p>
+                <p className="text-xs text-text-muted">{t.login.features.reading.desc}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-xl">📝</span>
+              <span className="text-xl">💬</span>
               <div>
-                <p className="text-sm text-text-primary">记录学习打卡</p>
-                <p className="text-xs text-text-muted">每日学习内容记录与分享</p>
+                <p className="text-sm text-text-primary">{t.login.features.chat.title}</p>
+                <p className="text-xs text-text-muted">{t.login.features.chat.desc}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <span className="text-xl">📊</span>
               <div>
-                <p className="text-sm text-text-primary">统计学习数据</p>
-                <p className="text-xs text-text-muted">可视化学习进度与成果</p>
+                <p className="text-sm text-text-primary">{t.login.features.personalized.title}</p>
+                <p className="text-xs text-text-muted">{t.login.features.personalized.desc}</p>
               </div>
             </div>
           </div>
@@ -67,17 +69,17 @@ export default function LoginPage() {
           disabled={isLoading}
           className="w-full py-4 bg-text-primary text-white rounded-2xl text-sm font-normal hover:bg-text-secondary transition-colors disabled:opacity-50"
         >
-          {isLoading ? "登录中..." : "微信授权登录"}
+          {isLoading ? t.login.loginBtnLoading : t.login.loginBtn}
         </button>
 
         <p className="text-xs text-text-muted text-center mt-6 leading-relaxed">
-          登录即表示同意
+          {t.login.agreement}
           <a href="#" className="text-text-secondary underline">
-            《用户协议》
+            {t.login.terms}
           </a>
-          和
+          {t.login.and}
           <a href="#" className="text-text-secondary underline">
-            《隐私政策》
+            {t.login.privacy}
           </a>
         </p>
       </div>

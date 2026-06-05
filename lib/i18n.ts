@@ -174,6 +174,54 @@ What would you like to know?`,
       whatsapp: 'WhatsApp',
       telegram: 'Telegram',
     },
+
+    // Auth Gate
+    auth: {
+      checking: 'Loading...',
+      title: 'Chat Access Required',
+      subtitle: 'Enter authorization code to unlock AI Chief Andy chat',
+      placeholder: 'Enter authorization code',
+      errorInvalid: 'Invalid code. Please contact AI Chief Andy for access.',
+      unlockBtn: 'Unlock Chat',
+      noCode: 'No code?',
+      contact: 'Email',
+      contactValue: 'andy@aipm.io',
+    },
+
+    // Login Page
+    login: {
+      title: 'AI Chief Andy',
+      subtitle: 'AI-Powered Strategic Insights',
+      features: {
+        title: 'Core Features',
+        reading: {
+          title: 'AI Insights Analysis',
+          desc: 'Strategic guidance combining ancient wisdom & AI',
+        },
+        chat: {
+          title: 'AI Chat Consultation',
+          desc: 'Trained on Andy\'s expertise and projects',
+        },
+        personalized: {
+          title: 'Personalized Reports',
+          desc: 'Deep analysis tailored to your situation',
+        },
+      },
+      loginBtn: 'Sign In',
+      loginBtnLoading: 'Signing In...',
+      agreement: 'By signing in, you agree to our',
+      terms: 'Terms of Service',
+      and: 'and',
+      privacy: 'Privacy Policy',
+    },
+
+    // API Messages
+    api: {
+      errorRequired: 'Please fill in all required fields: Name, Gender, Birth Date, Birth Time',
+      errorConfig: 'Service configuration error',
+      errorUnavailable: 'Analysis service temporarily unavailable',
+      errorRetry: 'Analysis failed, please try again',
+    },
   },
 
   zh: {
@@ -335,6 +383,54 @@ What would you like to know?`,
       email: '邮箱',
       whatsapp: 'WhatsApp',
       telegram: 'Telegram',
+    },
+
+    // Auth Gate
+    auth: {
+      checking: '加载中...',
+      title: '对话功能需要授权',
+      subtitle: '输入授权码解锁 AI 酋长Andy 的对话功能',
+      placeholder: '请输入授权码',
+      errorInvalid: '授权码无效，请联系 AI 酋长Andy 获取',
+      unlockBtn: '解锁对话',
+      noCode: '没有授权码？',
+      contact: '联系邮箱',
+      contactValue: 'andy@aipm.io',
+    },
+
+    // Login Page
+    login: {
+      title: 'AI 酋长',
+      subtitle: '东方智慧决策系统',
+      features: {
+        title: '核心功能',
+        reading: {
+          title: '天机测算分析',
+          desc: '东方智慧与 AI 结合的战略指导',
+        },
+        chat: {
+          title: 'AI 对话咨询',
+          desc: '基于 Andy 专业经验和项目训练',
+        },
+        personalized: {
+          title: '个性化报告',
+          desc: '针对您的情况深度分析',
+        },
+      },
+      loginBtn: '登录',
+      loginBtnLoading: '登录中...',
+      agreement: '登录即表示同意',
+      terms: '《用户协议》',
+      and: '和',
+      privacy: '《隐私政策》',
+    },
+
+    // API Messages
+    api: {
+      errorRequired: '请填写必填信息：姓名、性别、公历出生日期、出生时间',
+      errorConfig: '服务配置错误',
+      errorUnavailable: '算命服务暂时不可用',
+      errorRetry: '算命失败，请重试',
     },
   },
 };

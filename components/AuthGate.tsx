@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const AUTH_CODE_KEY = "openandy_auth_code";
 const VALID_CODES = ["AIAndy2026", "OpenAndy", "Juexing"];
@@ -10,6 +11,7 @@ interface AuthGateProps {
 }
 
 export default function AuthGate({ children }: AuthGateProps) {
+  const { t } = useLocale();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -30,14 +32,14 @@ export default function AuthGate({ children }: AuthGateProps) {
       setIsAuthorized(true);
       setError("");
     } else {
-      setError("授权码无效，请联系 AI 酋长Andy 获取");
+      setError(t.auth.errorInvalid);
     }
   };
 
   if (checking) {
     return (
       <div className="min-h-screen bg-bg flex items-center justify-center">
-        <div className="text-text-muted">加载中...</div>
+        <div className="text-text-muted">{t.auth.checking}</div>
       </div>
     );
   }
@@ -50,10 +52,10 @@ export default function AuthGate({ children }: AuthGateProps) {
             <div className="text-center mb-6">
               <span className="text-4xl mb-4 block">🔐</span>
               <h2 className="text-xl font-medium text-text-primary mb-2">
-                对话功能需要授权
+                {t.auth.title}
               </h2>
               <p className="text-sm text-text-muted">
-                输入授权码解锁 AI 酋长Andy 的对话功能
+                {t.auth.subtitle}
               </p>
             </div>
 
@@ -66,7 +68,7 @@ export default function AuthGate({ children }: AuthGateProps) {
                     setCode(e.target.value);
                     setError("");
                   }}
-                  placeholder="请输入授权码"
+                  placeholder={t.auth.placeholder}
                   className="w-full px-4 py-3 bg-bg border border-border rounded-lg text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-text-muted"
                   autoFocus
                 />
@@ -79,13 +81,13 @@ export default function AuthGate({ children }: AuthGateProps) {
                 type="submit"
                 className="w-full px-4 py-3 bg-text-primary text-white rounded-lg text-sm font-medium hover:bg-text-secondary transition-colors"
               >
-                解锁对话
+                {t.auth.unlockBtn}
               </button>
             </form>
 
             <div className="mt-6 pt-4 border-t border-border">
               <p className="text-xs text-text-muted text-center">
-                没有授权码？添加微信 <span className="font-medium">AIPMAndy</span> 获取
+                {t.auth.noCode} {t.auth.contact}: <span className="font-medium">{t.auth.contactValue}</span>
               </p>
             </div>
           </div>

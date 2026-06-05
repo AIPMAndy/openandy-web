@@ -1,4 +1,4 @@
-// 支付相关类型定义
+// Payment types and utilities
 export type PackageType = "basic" | "premium" | "vip";
 
 export interface PaymentOrder {
@@ -9,88 +9,57 @@ export interface PaymentOrder {
   createdAt: Date;
 }
 
-// 套餐配置
-export const PACKAGES = {
-  basic: {
-    name: "基础测算",
-    price: 299,
-    features: ["AI 自动生成", "基础洞察", "文字报告"],
-  },
-  premium: {
-    name: "深度解读",
-    price: 999,
-    features: ["AI 深度分析", "专家点评", "PDF 报告"],
-  },
-  vip: {
-    name: "至尊咨询",
-    price: 2999,
-    features: ["Andy 亲自解读", "1对1 咨询", "定制方案", "长期跟踪"],
-  },
-} as const;
+// Note: Package configuration is now managed in i18n.ts for internationalization
+// Prices are dynamically calculated based on locale in the frontend
 
-// 生成订单 ID
+// Generate order ID
 export function generateOrderId(): string {
   return `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-// 创建支付订单（模拟）
+// Create payment order (mock)
 export async function createPaymentOrder(
-  packageType: PackageType
+  packageType: PackageType,
+  price: number
 ): Promise<PaymentOrder> {
-  const pkg = PACKAGES[packageType];
-
-  if (!pkg) {
-    throw new Error("Invalid package type");
-  }
-
-  // 模拟订单创建
+  // Mock order creation
   const order: PaymentOrder = {
     id: generateOrderId(),
     packageType,
-    price: pkg.price,
+    price,
     status: "pending",
     createdAt: new Date(),
   };
 
-  // 在实际应用中，这里应该：
-  // 1. 调用支付宝/微信支付 API 创建订单
-  // 2. 将订单信息存储到数据库
-  // 3. 返回支付二维码或支付链接
+  // In production, this should:
+  // 1. Call Stripe/PayPal API to create order
+  // 2. Store order info in database
+  // 3. Return payment URL or checkout session
 
   return order;
 }
 
-// 验证支付状态（模拟）
+// Verify payment status (mock)
 export async function verifyPayment(orderId: string): Promise<boolean> {
-  // 在实际应用中，这里应该：
-  // 1. 查询数据库中的订单状态
-  // 2. 调用支付平台 API 验证支付状态
-  // 3. 更新订单状态
+  // In production, this should:
+  // 1. Query order status from database
+  // 2. Call payment platform API to verify status
+  // 3. Update order status
 
-  // 模拟：总是返回支付成功
+  // Mock: always return success
   return true;
 }
 
-// 支付回调处理（模拟）
+// Handle payment callback (mock)
 export async function handlePaymentCallback(data: {
   orderId: string;
   status: string;
   transactionId?: string;
 }): Promise<void> {
-  // 在实际应用中，这里应该：
-  // 1. 验证回调签名
-  // 2. 更新数据库中的订单状态
-  // 3. 触发后续业务逻辑（发送通知、生成报告等）
+  // In production, this should:
+  // 1. Verify callback signature
+  // 2. Update order status in database
+  // 3. Trigger business logic (send notification, generate report, etc.)
 
   console.log("Payment callback received:", data);
-}
-
-// 获取支付二维码（模拟）
-export async function getPaymentQRCode(orderId: string): Promise<string> {
-  // 在实际应用中，这里应该：
-  // 1. 调用支付平台 API 获取支付二维码
-  // 2. 返回二维码图片 URL 或 base64 数据
-
-  // 模拟：返回占位符
-  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${orderId}`;
 }

@@ -256,8 +256,8 @@ ${t.fortune.error.contact}`);
                     required
                   >
                     <option value="">{t.fortune.form.genderSelect}</option>
-                    <option value={t.fortune.form.male}>{t.fortune.form.male}</option>
-                    <option value={t.fortune.form.female}>{t.fortune.form.female}</option>
+                    <option value="male">{t.fortune.form.male}</option>
+                    <option value="female">{t.fortune.form.female}</option>
                   </select>
                 </div>
               </div>
@@ -404,18 +404,28 @@ ${t.fortune.error.contact}`);
               </p>
 
               <div className="max-w-md mx-auto mb-6">
-                <div className="w-48 h-48 mx-auto bg-ink-lighter/20 border-2 border-ink-lighter rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-ink-light">{locale === 'en' ? 'Contact QR Code' : 'Andy 企业微信二维码'}</span>
+                <div className="bg-paper p-6 rounded-lg border border-ink-lighter">
+                  <p className="text-sm text-ink mb-3 font-semibold">
+                    {t.fortune.result.qrTitle}
+                  </p>
+                  <p className="text-xs text-ink-light mb-4">
+                    {t.fortune.result.qrDesc}
+                  </p>
+                  <div className="space-y-2">
+                    <a
+                      href="mailto:andy@aipm.io"
+                      className="flex items-center justify-center gap-2 px-4 py-3 bg-ink text-white rounded-lg hover:bg-ink-light transition-colors"
+                    >
+                      <span>📧</span>
+                      <span className="text-sm">andy@aipm.io</span>
+                    </a>
+                    {locale === 'zh' && (
+                      <div className="w-48 h-48 mx-auto bg-ink-lighter/20 border-2 border-ink-lighter rounded-lg flex items-center justify-center">
+                        <span className="text-xs text-ink-light text-center px-4">Andy 企业微信二维码<br/>（开发中）</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <p className="text-sm text-ink-light mb-2">
-                  <strong>{t.fortune.result.qrTitle}</strong>
-                </p>
-                <p className="text-xs text-ink-light mb-4">
-                  {t.fortune.result.qrDesc}
-                </p>
-                <p className="text-xs text-ink-light">
-                  {t.common.email}: andy@aipm.io
-                </p>
               </div>
 
               <div className="bg-paper p-6 rounded-lg mb-6 text-left">

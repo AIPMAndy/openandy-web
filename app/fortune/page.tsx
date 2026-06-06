@@ -150,7 +150,7 @@ ${t.fortune.error.contact}`);
                   <ul className="space-y-2 mb-6 text-ink-light text-sm">
                     {pkg.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="mr-2">•</span>
+                        <span className="mr-2">✓</span>
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -167,6 +167,26 @@ ${t.fortune.error.contact}`);
         {/* Step 2: Payment */}
         {step === "payment" && selectedPackage && (
           <div className="card-oriental p-8 max-w-md mx-auto">
+            {/* Progress Indicator */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-semibold">✓</div>
+                  <span className="ml-2 text-sm text-ink-light">{t.fortune.steps.package}</span>
+                </div>
+                <div className="w-12 h-0.5 bg-cinnabar"></div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-cinnabar text-white flex items-center justify-center text-sm font-semibold">2</div>
+                  <span className="ml-2 text-sm font-semibold">{t.fortune.steps.payment}</span>
+                </div>
+                <div className="w-12 h-0.5 bg-ink-lighter"></div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-ink-lighter text-ink-light flex items-center justify-center text-sm font-semibold">3</div>
+                  <span className="ml-2 text-sm text-ink-light">{t.fortune.steps.form}</span>
+                </div>
+              </div>
+            </div>
+
             <h2 className="text-2xl font-semibold mb-6 text-center">
               {t.fortune.payment.title}
             </h2>
@@ -224,6 +244,26 @@ ${t.fortune.error.contact}`);
         {/* Step 3: Form */}
         {step === "form" && (
           <div className="card-oriental p-8">
+            {/* Progress Indicator */}
+            <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-semibold">✓</div>
+                  <span className="ml-2 text-sm text-ink-light">{t.fortune.steps.package}</span>
+                </div>
+                <div className="w-12 h-0.5 bg-green-500"></div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-sm font-semibold">✓</div>
+                  <span className="ml-2 text-sm text-ink-light">{t.fortune.steps.payment}</span>
+                </div>
+                <div className="w-12 h-0.5 bg-cinnabar"></div>
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-cinnabar text-white flex items-center justify-center text-sm font-semibold">3</div>
+                  <span className="ml-2 text-sm font-semibold">{t.fortune.steps.form}</span>
+                </div>
+              </div>
+            </div>
+
             <h2 className="text-2xl font-semibold mb-6 text-center">
               {t.fortune.form.title}
             </h2>
@@ -289,6 +329,7 @@ ${t.fortune.error.contact}`);
                     className="input-oriental"
                     required
                   />
+                  <p className="text-xs text-ink-light mt-1">{t.fortune.form.birthTimeHint}</p>
                 </div>
               </div>
 
@@ -304,6 +345,7 @@ ${t.fortune.error.contact}`);
                   placeholder={t.fortune.form.birthPlacePlaceholder}
                   className="input-oriental"
                 />
+                <p className="text-xs text-ink-light mt-1">{t.fortune.form.birthPlaceHint}</p>
               </div>
 
               <div>
@@ -351,6 +393,17 @@ ${t.fortune.error.contact}`);
         {/* Step 5: Result */}
         {step === "result" && (
           <div className="space-y-8">
+            {/* Success Message */}
+            <div className="card-oriental p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 text-center">
+              <div className="text-4xl mb-3">🎉</div>
+              <h3 className="text-xl font-bold text-green-800 mb-2">
+                {t.fortune.result.successTitle}
+              </h3>
+              <p className="text-sm text-green-700">
+                {t.fortune.result.successDesc}
+              </p>
+            </div>
+
             <div className="card-oriental p-8">
               <h2 className="title-oriental text-2xl font-bold mb-6 text-center">
                 {t.fortune.result.title}
@@ -432,15 +485,15 @@ ${t.fortune.error.contact}`);
                 <p className="font-semibold mb-3">{t.fortune.result.benefits.title}</p>
                 <ul className="space-y-2 text-sm text-ink-light">
                   <li className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{t.fortune.result.benefits.item1}</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{t.fortune.result.benefits.item2}</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{t.fortune.result.benefits.item3}</span>
                   </li>
                 </ul>

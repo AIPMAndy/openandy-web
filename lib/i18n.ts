@@ -109,6 +109,12 @@ export const translations = {
         backBtn: 'Back to Packages',
       },
 
+      steps: {
+        package: 'Select Package',
+        payment: 'Confirm',
+        form: 'Your Info',
+      },
+
       // Form
       form: {
         title: 'Your Information',
@@ -120,8 +126,10 @@ export const translations = {
         female: 'Female',
         birthDate: 'Birth Date',
         birthTime: 'Birth Time',
+        birthTimeHint: 'Accurate to the hour for better chart precision',
         birthPlace: 'Birth Place (Optional)',
         birthPlacePlaceholder: 'e.g., New York',
+        birthPlaceHint: 'Helps account for timezone differences',
         question: 'Your Current Challenge or Decision',
         questionPlaceholder: 'e.g., Career direction, major investment, life planning...',
         submitBtn: 'Start Analysis',
@@ -140,6 +148,8 @@ export const translations = {
       // Result
       result: {
         title: 'Your Strategic Insights',
+        successTitle: 'Analysis Complete!',
+        successDesc: 'Your personalized strategic insights are ready',
         ctaTitle: 'Want Deeper Analysis?',
         ctaDesc: 'AI insights are just the beginning, true wisdom comes from deep dialogue',
         qrTitle: 'AI Chief Andy',
@@ -348,6 +358,12 @@ What would you like to know?`,
         backBtn: '返回选择套餐',
       },
 
+      steps: {
+        package: '选择套餐',
+        payment: '确认',
+        form: '填写信息',
+      },
+
       form: {
         title: '填写您的信息',
         name: '姓名',
@@ -358,8 +374,10 @@ What would you like to know?`,
         female: '女',
         birthDate: '出生日期',
         birthTime: '出生时间',
+        birthTimeHint: '精确到小时，影响命盘准确度',
         birthPlace: '出生地（选填）',
         birthPlacePlaceholder: '例如：北京市',
+        birthPlaceHint: '用于考虑地域时差，提升分析精准度',
         question: '您当前面临的问题或决策',
         questionPlaceholder: '例如：事业发展方向、重大投资决策、人生规划...',
         submitBtn: '开始测算',
@@ -376,6 +394,8 @@ What would you like to know?`,
 
       result: {
         title: '您的天机测算结果',
+        successTitle: '测算完成！',
+        successDesc: '您的专属天机解读已生成，请仔细阅读',
         ctaTitle: '想要更深入的解读？',
         ctaDesc: 'AI 测算只是开始，真正的智慧在于深度对话',
         qrTitle: 'AI 酋长 Andy',

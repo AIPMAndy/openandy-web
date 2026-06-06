@@ -17,6 +17,29 @@ export const translations = {
       cta: 'Get Started',
       testimonial: 'Trusted by 100+ business leaders',
 
+      // Social Proof
+      socialProof: {
+        title: 'Trusted by Decision Makers',
+        stats: {
+          clients: '100+',
+          clientsLabel: 'Business Leaders',
+          satisfaction: '95%',
+          satisfactionLabel: 'Satisfaction Rate',
+          experience: '10+',
+          experienceLabel: 'Years Experience',
+        },
+      },
+
+      // Trust Elements
+      trust: {
+        guarantee: '30-Day Satisfaction Guarantee',
+        guaranteeDesc: 'Not satisfied? Full refund, no questions asked',
+        privacy: 'Your Privacy Protected',
+        privacyDesc: 'All personal data encrypted and confidential',
+        support: '24/7 Support Available',
+        supportDesc: 'Get help whenever you need it',
+      },
+
       // Value Props
       valueProps: {
         wisdom: {
@@ -42,18 +65,18 @@ export const translations = {
         subtitle: 'Choose your strategic guidance plan',
         basic: {
           name: 'Basic Reading',
-          features: ['AI-generated insights', 'Core analysis', 'Text report'],
+          features: ['AI-generated insights', 'Core strategic analysis', 'Detailed text report', '48-hour delivery'],
           cta: 'Get Reading',
         },
         premium: {
           name: 'Deep Analysis',
           badge: 'Popular',
-          features: ['AI deep analysis', 'Expert commentary', 'PDF report'],
+          features: ['Enhanced AI analysis', 'Multi-dimensional insights', 'Professional PDF report', 'Priority 24-hour delivery'],
           cta: 'Get Reading',
         },
         vip: {
           name: 'Premium Consultation',
-          features: ['Personal consultation with Andy', '1-on-1 session', 'Custom strategy', 'Long-term guidance'],
+          features: ['Everything in Deep Analysis', 'Personal 60-min consultation with Andy', 'Custom strategy roadmap', 'Long-term follow-up guidance'],
           cta: 'Book Now',
         },
       },
@@ -78,11 +101,11 @@ export const translations = {
         title: 'Confirm Order',
         package: 'Package',
         amount: 'Amount',
-        devNotice: '⚠️ Development Stage - Demo Mode',
-        devDesc: 'Payment integration is under development',
-        willSupport: 'Will support upon official launch',
+        devNotice: '🎁 Free Beta Access',
+        devDesc: 'Currently in beta - full experience at no cost',
+        willSupport: 'Official payment launching soon',
         paymentMethods: 'Stripe / PayPal / Credit Card',
-        continueBtn: 'Continue (Skip Payment)',
+        continueBtn: 'Start My Free Analysis',
         backBtn: 'Back to Packages',
       },
 
@@ -240,6 +263,29 @@ What would you like to know?`,
       cta: '开始测算',
       testimonial: '已为 100+ 企业家提供决策洞察',
 
+      // Social Proof
+      socialProof: {
+        title: '深受决策者信赖',
+        stats: {
+          clients: '100+',
+          clientsLabel: '企业家客户',
+          satisfaction: '95%',
+          satisfactionLabel: '满意度',
+          experience: '10+',
+          experienceLabel: '年咨询经验',
+        },
+      },
+
+      // Trust Elements
+      trust: {
+        guarantee: '30天满意保证',
+        guaranteeDesc: '不满意？无理由全额退款',
+        privacy: '隐私安全保护',
+        privacyDesc: '所有个人信息加密存储，严格保密',
+        support: '7×24 小时支持',
+        supportDesc: '随时获得帮助和解答',
+      },
+
       valueProps: {
         wisdom: {
           title: '东方智慧传承',
@@ -263,18 +309,18 @@ What would you like to know?`,
         subtitle: '选择适合您的决策辅助方案',
         basic: {
           name: '基础测算',
-          features: ['AI 自动生成', '基础洞察', '文字报告'],
+          features: ['AI 智能生成', '核心战略分析', '详细文字报告', '48小时交付'],
           cta: '立即测算',
         },
         premium: {
           name: '深度解读',
           badge: '推荐',
-          features: ['AI 深度分析', '专家点评', 'PDF 报告'],
+          features: ['增强版 AI 分析', '多维度深度洞察', '专业 PDF 报告', '优先 24小时交付'],
           cta: '立即测算',
         },
         vip: {
           name: '至尊咨询',
-          features: ['Andy 亲自解读', '1对1 咨询', '定制方案', '长期跟踪'],
+          features: ['包含深度解读全部内容', 'Andy 亲自 60分钟咨询', '定制战略路线图', '长期跟踪指导'],
           cta: '立即预约',
         },
       },
@@ -294,11 +340,11 @@ What would you like to know?`,
         title: '确认订单',
         package: '套餐',
         amount: '金额',
-        devNotice: '⚠️ 开发阶段 - 模拟支付',
-        devDesc: '当前为产品测试阶段，支付功能尚未开通',
-        willSupport: '正式上线后将支持',
+        devNotice: '🎁 限时免费体验',
+        devDesc: '当前为内测阶段，免费体验完整服务',
+        willSupport: '正式上线后将开通',
         paymentMethods: '支付宝 / 微信支付 / 企业转账',
-        continueBtn: '继续体验（跳过支付）',
+        continueBtn: '开始免费测算',
         backBtn: '返回选择套餐',
       },
 

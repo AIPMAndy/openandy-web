@@ -38,6 +38,22 @@ export default function HomePage() {
       {/* Value Proposition Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
+          {/* Social Proof Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-center">
+            <div>
+              <div className="text-5xl font-bold text-cinnabar mb-2">{t.home.socialProof.stats.clients}</div>
+              <p className="text-ink-light">{t.home.socialProof.stats.clientsLabel}</p>
+            </div>
+            <div>
+              <div className="text-5xl font-bold text-cinnabar mb-2">{t.home.socialProof.stats.satisfaction}</div>
+              <p className="text-ink-light">{t.home.socialProof.stats.satisfactionLabel}</p>
+            </div>
+            <div>
+              <div className="text-5xl font-bold text-cinnabar mb-2">{t.home.socialProof.stats.experience}</div>
+              <p className="text-ink-light">{t.home.socialProof.stats.experienceLabel}</p>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Card 1 */}
             <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
@@ -94,7 +110,7 @@ export default function HomePage() {
             {t.home.pricing.subtitle}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {/* Basic Package */}
             <div className="card-oriental p-8 hover:shadow-lg transition-shadow">
               <h3 className="text-2xl font-semibold mb-2">{t.home.pricing.basic.name}</h3>
@@ -106,7 +122,7 @@ export default function HomePage() {
               <ul className="space-y-3 mb-8 text-ink-light">
                 {t.home.pricing.basic.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -133,7 +149,7 @@ export default function HomePage() {
               <ul className="space-y-3 mb-8 text-ink-light">
                 {t.home.pricing.premium.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -157,7 +173,7 @@ export default function HomePage() {
               <ul className="space-y-3 mb-8 text-ink-light">
                 {t.home.pricing.vip.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -168,6 +184,25 @@ export default function HomePage() {
               >
                 {t.home.pricing.vip.cta}
               </Link>
+            </div>
+          </div>
+
+          {/* Trust Elements */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-ink-lighter">
+            <div className="text-center">
+              <div className="text-3xl mb-3">🛡️</div>
+              <h4 className="font-semibold text-ink mb-2">{t.home.trust.guarantee}</h4>
+              <p className="text-sm text-ink-light">{t.home.trust.guaranteeDesc}</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-3">🔒</div>
+              <h4 className="font-semibold text-ink mb-2">{t.home.trust.privacy}</h4>
+              <p className="text-sm text-ink-light">{t.home.trust.privacyDesc}</p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-3">💬</div>
+              <h4 className="font-semibold text-ink mb-2">{t.home.trust.support}</h4>
+              <p className="text-sm text-ink-light">{t.home.trust.supportDesc}</p>
             </div>
           </div>
         </div>

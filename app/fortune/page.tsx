@@ -185,11 +185,11 @@ ${t.fortune.error.contact}`);
               </div>
             </div>
 
-            <div className="mb-6 p-6 bg-amber-50 border border-amber-200 rounded-lg text-center">
-              <p className="text-sm text-amber-800 mb-2 font-semibold">
+            <div className="mb-6 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
+              <p className="text-sm text-green-800 mb-2 font-semibold">
                 {t.fortune.payment.devNotice}
               </p>
-              <p className="text-xs text-amber-700">
+              <p className="text-xs text-green-700">
                 {t.fortune.payment.devDesc}
               </p>
             </div>

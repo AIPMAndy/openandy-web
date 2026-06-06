@@ -197,6 +197,14 @@ Trained on Andy's public projects and content, I can help you:
 What would you like to know?`,
       placeholder: 'Type your question...',
       sendBtn: 'Send',
+      starterTitle: '💡 Try these questions:',
+      starterQuestions: [
+        'What are Andy\'s open-source projects?',
+        'How to use AI for product decisions?',
+        'Recommend an AI learning path for me',
+        'What are the core features of this product?',
+      ],
+      inputHint: 'Press Enter to send, Shift+Enter for new line',
     },
 
     // Common
@@ -441,6 +449,14 @@ What would you like to know?`,
 有什么想问的，尽管说～`,
       placeholder: '输入你的问题...',
       sendBtn: '发送',
+      starterTitle: '💡 试试这些问题：',
+      starterQuestions: [
+        'Andy 有哪些开源项目？',
+        '如何用 AI 做产品决策？',
+        '给我推荐学习 AI 的路径',
+        '这个产品的核心功能是什么？',
+      ],
+      inputHint: '按 Enter 发送，Shift+Enter 换行',
     },
 
     common: {

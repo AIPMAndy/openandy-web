@@ -98,6 +98,24 @@ function ChatContent() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto px-6 py-4">
+          {/* Starter Questions - Show only when no messages except welcome */}
+          {messages.length === 1 && (
+            <div className="mb-6 p-6 bg-white rounded-lg border border-border">
+              <p className="text-sm font-medium text-text-primary mb-3">{t.chat.starterTitle}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {t.chat.starterQuestions.map((question, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setInput(question)}
+                    className="text-left text-sm text-text-muted hover:text-text-primary hover:bg-bg px-3 py-2 rounded border border-border hover:border-text-muted transition-colors"
+                  >
+                    💬 {question}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {messages.map((message) => (
             <ChatMessage key={message.id} message={message} />
           ))}
@@ -122,15 +140,21 @@ function ChatContent() {
       <div className="bg-white border-t border-border">
         <div className="max-w-4xl mx-auto px-6 py-3">
           <div className="flex gap-2">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder={t.chat.placeholder}
-              className="flex-1 px-4 py-3 bg-bg border border-border rounded-lg text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-text-muted"
-              disabled={isLoading}
-            />
+            <div className="flex-1 relative">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder={t.chat.placeholder}
+                className="w-full px-4 py-3 bg-bg border border-border rounded-lg text-sm text-text-primary placeholder-text-muted focus:outline-none focus:border-text-muted"
+                disabled={isLoading}
+                maxLength={2000}
+              />
+              <div className="absolute right-3 bottom-3 text-xs text-text-muted">
+                {input.length}/2000
+              </div>
+            </div>
             <button
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
@@ -139,6 +163,7 @@ function ChatContent() {
               {t.chat.sendBtn}
             </button>
           </div>
+          <p className="text-xs text-text-muted mt-2 text-center">{t.chat.inputHint}</p>
         </div>
       </div>
     </div>

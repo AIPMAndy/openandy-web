@@ -35,11 +35,100 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Value Proposition Section */}
-      <section className="py-20 px-6">
+      {/* About Andy Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-cinnabar to-gold flex items-center justify-center text-6xl border-4 border-paper shadow-lg">
+              👨‍💼
+            </div>
+            <h2 className="title-oriental text-4xl font-bold mb-3">
+              {t.home.about.title}
+            </h2>
+            <p className="text-lg text-cinnabar mb-6">
+              {t.home.about.subtitle}
+            </p>
+            <p className="text-ink-light leading-relaxed max-w-2xl mx-auto">
+              {t.home.about.bio}
+            </p>
+          </div>
+
+          <div className="bg-paper p-8 rounded-lg border border-ink-lighter">
+            <h3 className="text-xl font-semibold text-ink mb-4 text-center">
+              {t.home.about.expertise.title}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {t.home.about.expertise.items.map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3 p-3 bg-white rounded border border-ink-lighter">
+                  <span className="text-cinnabar text-xl">✓</span>
+                  <span className="text-ink">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 px-6 bg-paper">
         <div className="max-w-6xl mx-auto">
+          <h2 className="title-oriental text-4xl font-bold text-center mb-4">
+            {t.home.services.title}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            {/* AI Chat Service */}
+            <Link href="/chat" className="card-oriental p-8 text-center hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-5xl mb-4">💬</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                {t.home.services.chat.title}
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-6">
+                {t.home.services.chat.desc}
+              </p>
+              <span className="inline-block btn-secondary">
+                {t.home.services.chat.cta}
+              </span>
+            </Link>
+
+            {/* Fortune Service */}
+            <Link href="/fortune" className="card-oriental p-8 text-center hover:shadow-lg transition-all hover:scale-105 border-2 border-cinnabar">
+              <div className="text-5xl mb-4">🔮</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                {t.home.services.fortune.title}
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-6">
+                {t.home.services.fortune.desc}
+              </p>
+              <span className="inline-block btn-primary">
+                {t.home.services.fortune.cta}
+              </span>
+            </Link>
+
+            {/* Consulting Service */}
+            <Link href="/fortune?package=vip" className="card-oriental p-8 text-center hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-5xl mb-4">🎯</div>
+              <h3 className="title-oriental text-2xl font-semibold mb-3">
+                {t.home.services.consulting.title}
+              </h3>
+              <p className="text-ink-light leading-relaxed mb-6">
+                {t.home.services.consulting.desc}
+              </p>
+              <span className="inline-block btn-secondary">
+                {t.home.services.consulting.cta}
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="title-oriental text-3xl font-bold text-center mb-12">
+            {t.home.socialProof.title}
+          </h2>
           {/* Social Proof Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-5xl font-bold text-cinnabar mb-2">{t.home.socialProof.stats.clients}</div>
               <p className="text-ink-light">{t.home.socialProof.stats.clientsLabel}</p>
@@ -53,55 +142,11 @@ export default function HomePage() {
               <p className="text-ink-light">{t.home.socialProof.stats.experienceLabel}</p>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
-              <div className="text-5xl mb-4">📜</div>
-              <h3 className="title-oriental text-2xl font-semibold mb-3">
-                {t.home.valueProps.wisdom.title}
-              </h3>
-              <p className="text-ink-light leading-relaxed mb-2">
-                {t.home.valueProps.wisdom.desc1}
-              </p>
-              <p className="text-ink-light leading-relaxed">
-                {t.home.valueProps.wisdom.desc2}
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
-              <div className="text-5xl mb-4">🤖</div>
-              <h3 className="title-oriental text-2xl font-semibold mb-3">
-                {t.home.valueProps.ai.title}
-              </h3>
-              <p className="text-ink-light leading-relaxed mb-2">
-                {t.home.valueProps.ai.desc1}
-              </p>
-              <p className="text-ink-light leading-relaxed">
-                {t.home.valueProps.ai.desc2}
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="card-oriental p-8 text-center hover:shadow-md transition-shadow">
-              <div className="text-5xl mb-4">👔</div>
-              <h3 className="title-oriental text-2xl font-semibold mb-3">
-                {t.home.valueProps.exclusive.title}
-              </h3>
-              <p className="text-ink-light leading-relaxed mb-2">
-                {t.home.valueProps.exclusive.desc1}
-              </p>
-              <p className="text-ink-light leading-relaxed">
-                {t.home.valueProps.exclusive.desc2}
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-paper">
         <div className="max-w-6xl mx-auto">
           <h2 className="title-oriental text-4xl font-bold text-center mb-4">
             {t.home.pricing.title}

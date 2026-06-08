@@ -17,6 +17,22 @@ export const translations = {
       cta: 'Get Started',
       testimonial: 'Trusted by 100+ business leaders',
 
+      // About Section
+      about: {
+        title: 'About Andy',
+        subtitle: 'Strategic Advisor · AI Product Expert · Open Source Contributor',
+        bio: 'With 10+ years of experience in strategic advisory and AI product development, Andy helps business leaders make better decisions through the fusion of Eastern wisdom and modern AI technology.',
+        expertise: {
+          title: 'Core Expertise',
+          items: [
+            'Strategic Decision Consulting',
+            'AI Product Development',
+            'Eastern Philosophy & Business Strategy',
+            'Open Source Community Leadership',
+          ],
+        },
+      },
+
       // Social Proof
       socialProof: {
         title: 'Trusted by Decision Makers',
@@ -57,6 +73,33 @@ export const translations = {
           desc1: 'Tailored for CEOs & entrepreneurs',
           desc2: 'Private intelligence for elite decision-makers',
         },
+      },
+
+      // Services Section
+      services: {
+        title: 'Core Services',
+        chat: {
+          title: 'AI Dialogue',
+          desc: 'Chat with Andy\'s AI assistant trained on his expertise',
+          cta: 'Start Chat',
+        },
+        fortune: {
+          title: 'Strategic Insights',
+          desc: 'AI-powered analysis for your critical decisions',
+          cta: 'Get Insights',
+        },
+        consulting: {
+          title: 'Deep Consultation',
+          desc: 'Personal 1-on-1 strategy sessions with Andy',
+          cta: 'Learn More',
+        },
+      },
+
+      // Projects Section
+      projects: {
+        title: 'Featured Projects',
+        subtitle: 'Open source contributions and product innovations',
+        viewAll: 'View All Projects',
       },
 
       // Pricing
@@ -281,6 +324,22 @@ What would you like to know?`,
       cta: '开始测算',
       testimonial: '已为 100+ 企业家提供决策洞察',
 
+      // 关于 Andy
+      about: {
+        title: '关于 Andy',
+        subtitle: '战略顾问 · AI 产品专家 · 开源贡献者',
+        bio: '10+ 年战略咨询与 AI 产品开发经验，通过东方智慧与现代 AI 技术的融合，帮助企业家做出更明智的决策。',
+        expertise: {
+          title: '核心专长',
+          items: [
+            '战略决策咨询',
+            'AI 产品开发',
+            '东方哲学与商业战略',
+            '开源社区领导力',
+          ],
+        },
+      },
+
       // Social Proof
       socialProof: {
         title: '深受决策者信赖',
@@ -320,6 +379,33 @@ What would you like to know?`,
           desc1: 'CEO、企业家定制',
           desc2: '高端人群的私人智囊',
         },
+      },
+
+      // 核心服务
+      services: {
+        title: '核心服务',
+        chat: {
+          title: 'AI 对话',
+          desc: '与 Andy 的 AI 分身对话，获取专业见解',
+          cta: '开始对话',
+        },
+        fortune: {
+          title: '天机测算',
+          desc: 'AI 驱动的战略洞察分析，辅助关键决策',
+          cta: '立即测算',
+        },
+        consulting: {
+          title: '深度咨询',
+          desc: 'Andy 亲自 1对1 战略咨询服务',
+          cta: '了解详情',
+        },
+      },
+
+      // 项目作品
+      projects: {
+        title: '精选项目',
+        subtitle: '开源贡献与产品创新',
+        viewAll: '查看全部项目',
       },
 
       pricing: {

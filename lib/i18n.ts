@@ -259,6 +259,21 @@ What would you like to know?`,
       telegram: 'Telegram',
     },
 
+    // Profile Page
+    profile: {
+      title: 'User Center',
+      subtitle: 'Access your services and contact Andy',
+      services: {
+        fortune: 'Strategic Insights',
+        fortuneDesc: 'Get AI-powered analysis for your decisions',
+        chat: 'AI Dialogue',
+        chatDesc: 'Chat with Andy\'s AI assistant',
+      },
+      contact: {
+        title: 'Contact Andy',
+      },
+    },
+
     // Auth Gate
     auth: {
       checking: 'Loading...',
@@ -551,6 +566,21 @@ What would you like to know?`,
       email: '邮箱',
       whatsapp: 'WhatsApp',
       telegram: 'Telegram',
+    },
+
+    // Profile Page
+    profile: {
+      title: '个人中心',
+      subtitle: '访问您的服务并联系 Andy',
+      services: {
+        fortune: '天机测算',
+        fortuneDesc: '获取 AI 驱动的战略洞察分析',
+        chat: 'AI 对话',
+        chatDesc: '与 Andy 的 AI 分身对话',
+      },
+      contact: {
+        title: '联系 Andy',
+      },
     },
 
     // Auth Gate
